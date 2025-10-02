@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavado de Tenis - Super Clean TINTORERIAS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================== */
+        /* === ESTILOS GENERALES (COPIADOS DE SERVICIOS.HTML) === */
+        /* ============================================== */
+        :root {
+            --color-primario-logo: #bbff00;
+            --color-fondo-header: #1a1a1a;
+            --color-texto-oscuro: #333;
+            --color-texto-claro: #f0f0f0;
+            --color-gris-fondo: #2e2e2e;
+            --color-gris-intermedio: #555;
+            --color-blanco: #ffffff;
+            --sombra-ligera: 0 4px 10px rgba(0, 0, 0, 0.1);
+            --transicion-suave: all 0.4s ease-in-out;
+            --color-exito: #28a745;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--color-texto-oscuro); background-color: #f4f4f4; }
+        .contenedor { max-width: 90%; margin: auto; padding: 0 15px; }
+
+        /* Header y Navbar (consistente) */
+        .header-principal { background: var(--color-fondo-header); box-shadow: var(--sombra-ligera); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 10px 0; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+        #menu-btn { font-size: 1.2rem; color: var(--color-blanco); cursor: pointer; font-weight: bold; padding: 5px; transition: color 0.3s ease; }
+        #menu-btn:hover { color: var(--color-primario-logo); }
+        .logo-container .texto-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-container .texto-logo .super-clean { font-family: 'Segoe Script', cursive, sans-serif; font-size: 1.4rem; color: var(--color-blanco); transform: rotate(-8deg); white-space: nowrap; margin-bottom: 5px; }
+        .logo-container .texto-logo .tintorerias { font-family: Arial, sans-serif; font-size: 1.8rem; font-weight: bold; color: var(--color-primario-logo); letter-spacing: 2px; text-transform: uppercase; }
+        .nav-desplegable { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--color-fondo-header); z-index: 1001; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: translateY(-100%); transition: var(--transicion-suave); }
+        .nav-desplegable.activo { transform: translateY(0); }
+        .nav-desplegable ul { list-style: none; text-align: center; }
+        .nav-desplegable ul li { margin: 20px 0; }
+        .nav-desplegable ul li a { color: var(--color-blanco); font-size: 1.8rem; text-decoration: none; font-weight: bold; transition: color 0.3s ease; }
+        .nav-desplegable ul li a:hover { color: var(--color-primario-logo); }
+        #cerrar-menu { position: absolute; top: 25px; right: 30px; font-size: 2.5rem; color: var(--color-blanco); cursor: pointer; transition: transform 0.3s ease; }
+        #cerrar-menu:hover { transform: rotate(90deg); }
+
+        /* ============================================== */
+        /* === ESTILOS ESPECÍFICOS PARA PÁGINA DE TENIS === */
+        /* ============================================== */
+        main { padding-top: 80px; }
+
+        .hero-tenis {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1887&auto=format&fit=crop') center/cover no-repeat;
+            color: var(--color-blanco);
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .hero-tenis h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--color-primario-logo);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+        .hero-tenis .eslogan {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .seccion-servicios-tenis {
+            padding: 50px 0;
+            background-color: var(--color-blanco);
+        }
+        .seccion-servicios-tenis h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--color-fondo-header);
+            margin-bottom: 40px;
+        }
+        .lista-servicios-tenis {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .servicio-card {
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            box-shadow: var(--sombra-ligera);
+            width: 320px;
+            text-align: center;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .servicio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+        }
+        .servicio-card .icono {
+            font-size: 4rem;
+            color: var(--color-primario-logo);
+            margin-bottom: 20px;
+        }
+        .servicio-card .nombre {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color-fondo-header);
+            margin-bottom: 15px;
+        }
+        .servicio-card .descripcion {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .servicio-card .precio {
+            font-size: 2rem;
+            font-weight: bolder;
+            color: var(--color-texto-oscuro);
+            margin-bottom: 25px;
+        }
+        .btn-agregar {
+            background-color: var(--color-fondo-header);
+            color: var(--color-blanco);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-agregar:hover { background-color: var(--color-gris-intermedio); }
+        .btn-agregar:disabled { background-color: var(--color-exito); cursor: not-allowed; }
+        .btn-agregar:disabled::after { content: " Agregado ✓"; }
+
+        /* Carrito y Modales (reutilizados y adaptados) */
+        .seccion-carrito { background-color: var(--color-fondo-header); color: var(--color-blanco); padding: 30px 0; }
+        .seccion-carrito h2 { text-align: center; font-size: 2rem; margin-bottom: 30px; color: var(--color-primario-logo); }
+        #lista-carrito { background-color: #333; border-radius: 10px; padding: 20px; min-height: 50px; margin-bottom: 20px; }
+        .item-carrito { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed #555; }
+        .item-carrito:last-child { border-bottom: none; }
+        .item-carrito .nombre { font-weight: bold; font-size: 1.1rem; }
+        .btn-quitar { background-color: #dc3545; color: white; border:none; padding: 5px 10px; border-radius:5px; cursor:pointer; }
+        .carrito-total { text-align: right; font-size: 1.5rem; font-weight: bold; margin-top: 20px; }
+        .btn-finalizar-compra { display: block; width: fit-content; margin: 30px auto 0; padding: 15px 30px; background-color: var(--color-primario-logo); color: var(--color-fondo-header); font-size: 1.3rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: transform 0.2s ease; }
+        
+        .modal { display: none; position: fixed; z-index: 1002; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px); align-items: center; justify-content: center; }
+        .modal-content { background-color: #fff; color: var(--color-texto-oscuro); margin: auto; padding: 30px; border-radius: 15px; max-width: 500px; text-align: center; position: relative; animation: modalFadeIn 0.3s forwards ease-out; }
+        @keyframes modalFadeIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-content h3 { font-size: 1.8rem; margin-bottom: 25px; color: var(--color-fondo-header); }
+        .close-button { position: absolute; top: 15px; right: 25px; color: #aaa; font-size: 35px; font-weight: bold; cursor: pointer; }
+
+        /* Formulario en Modal */
+        .form-group { text-align: left; margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; }
+        .btn-submit-pedido { background-color: var(--color-exito); color: white; width: 100%; padding: 15px; font-size: 1.2rem; border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.3s; }
+        .btn-submit-pedido:hover { background-color: #218838; }
+
+        /* Modal de confirmación */
+        #modal-confirmacion .modal-content { background-color: var(--color-fondo-header); color: var(--color-blanco); }
+        #modal-confirmacion h3 { color: var(--color-primario-logo); }
+        .codigo-pedido { font-size: 2.5rem; font-weight: bold; color: var(--color-primario-logo); letter-spacing: 5px; margin: 20px 0; background-color: #333; padding: 10px 20px; border-radius: 8px; }
+        .btn-cerrar-modal { background-color: var(--color-gris-intermedio); color: white; padding: 12px 25px; border-radius: 8px; cursor: pointer; border: none; }
+
+        .footer { background-color: var(--color-gris-fondo); color: var(--color-texto-claro); padding: 30px 0; font-size: 0.9em; margin-top: 40px; }
+        .footer-bottom { text-align: center; padding: 20px 0; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-desplegable" id="nav-menu">
+        <i class="fas fa-times" id="cerrar-menu"></i>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="ubicacion.html">Ubicación</a></li>
+            <li><a href="domicilio.html">Servicio a Domicilio</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="tenis.html">Lavado de Tenis</a></li>
+        </ul>
+    </div>
+
+    <header class="header-principal">
+        <nav class="navbar contenedor">
+            <div id="menu-btn">MENU</div>
+            <a href="index.html" class="texto-logo">
+                <span class="super-clean">Super Clean</span>
+                <span class="tintorerias">TINTORERIAS</span>
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-tenis">
+            <h1>¡No los tires, renuévalos!</h1>
+            <p class="eslogan">
+                Más que una limpieza, es una renovación completa. Con nuestras técnicas especializadas, eliminamos la suciedad más difícil, restauramos colores y dejamos tus tenis favoritos luciendo como el día que los compraste.
+            </p>
+        </section>
+
+        <section class="seccion-servicios-tenis">
+            <div class="contenedor">
+                <h2>Elige el Tratamiento Perfecto</h2>
+                <div class="lista-servicios-tenis" id="lista-servicios-tenis">
+                    </div>
+            </div>
+        </section>
+
+        <section class="seccion-carrito">
+            <div class="contenedor">
+                <h2>Tu Carrito de Lavado</h2>
+                <div id="lista-carrito"><p style="text-align: center; color: #aaa;">Aún no has agregado servicios.</p></div>
+                <div class="carrito-total">Total: <span id="total-carrito">$0.00</span></div>
+                <button class="btn-finalizar-compra" id="btn-finalizar-compra">Continuar con el Pedido</button>
+            </div>
+        </section>
+    </main>
+    
+    <div id="modal-datos-cliente" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="cerrar-modal-datos">&times;</span>
+            <h3>Completa tu Información</h3>
+            <p>Necesitamos tus datos para registrar y confirmar tu pedido.</p>
+            <form id="pedido-form" action="https://formspree.io/f/mpwyrjpd" method="POST">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono (WhatsApp):</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="_replyto" required>
+                </div>
+                <input type="hidden" name="_subject" value="Nuevo Pedido - Lavado de Tenis">
+                <input type="hidden" name="detalles_pedido" id="detalles_pedido">
+                <input type="hidden" name="total_pedido" id="total_pedido">
+                <input type="hidden" name="codigo_pedido" id="codigo_pedido">
+                
+                <button type="submit" class="btn-submit-pedido" id="btn-submit-pedido">Enviar y Generar Código</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-confirmacion" class="modal">
+        <div class="modal-content">
+            <h3>¡Pedido Recibido!</h3>
+            <p>Guarda este código. Lo necesitarás al entregar tus prendas.</p>
+            <div class="codigo-pedido" id="codigo-generado-confirmacion"></div>
+            <p>Recibirás una confirmación en tu correo y te contactaremos por WhatsApp.</p>
+            <button class="btn-cerrar-modal" id="btn-cerrar-confirmacion">Entendido</button>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-bottom"><p>© Todos los derechos reservados Super Clean TINTORERIAS 2024</p></div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // =================================================================
+            // ===== [!] AQUÍ ESTÁ EL ÚNICO CAMBIO REALIZADO [!] =====
+            // =================================================================
+            const serviciosTenis = [
+                { id: 101, nombre: "Lavado Profesional", descripcion: "Limpieza completa de tela, piel y suela para eliminar suciedad y manchas, dejando tus tenis impecables.", precio: 60.00, icono: "fa-solid fa-soap" },
+                { id: 102, nombre: "Lavado + Agujetas Nuevas", descripcion: "El servicio de lavado profesional más un par de agujetas nuevas para un look totalmente renovado.", precio: 80.00, icono: "fa-solid fa-wand-magic-sparkles" }
+            ];
+            // =================================================================
+            // =================================================================
+
+            // --- VARIABLES DEL DOM ---
+            const listaServiciosDiv = document.getElementById('lista-servicios-tenis');
+            const listaCarritoDiv = document.getElementById('lista-carrito');
+            const totalCarritoSpan = document.getElementById('total-carrito');
+            const btnFinalizarCompra = document.getElementById('btn-finalizar-compra');
+            
+            // Modales
+            const modalDatosCliente = document.getElementById('modal-datos-cliente');
+            const modalConfirmacion = document.getElementById('modal-confirmacion');
+            const cerrarModalDatosBtn = document.getElementById('cerrar-modal-datos');
+            const btnCerrarConfirmacion = document.getElementById('btn-cerrar-confirmacion');
+
+            // Formulario
+            const pedidoForm = document.getElementById('pedido-form');
+            const btnSubmitPedido = document.getElementById('btn-submit-pedido');
+            
+            // --- ESTADO DE LA APLICACIÓN ---
+            let carrito = [];
+
+            // --- FUNCIONES DE RENDERIZADO ---
+            function renderizarServicios() {
+                listaServiciosDiv.innerHTML = '';
+                serviciosTenis.forEach(servicio => {
+                    const enCarrito = carrito.some(item => item.id === servicio.id);
+                    const servicioCard = document.createElement('div');
+                    servicioCard.classList.add('servicio-card');
+                    servicioCard.innerHTML = `
+                        <i class="icono ${servicio.icono}"></i>
+                        <h3 class="nombre">${servicio.nombre}</h3>
+                        <p class="descripcion">${servicio.descripcion}</p>
+                        <div class="precio">$${servicio.precio.toFixed(2)}</div>
+                        <button class="btn-agregar" onclick="agregarAlCarrito(${servicio.id})" ${enCarrito ? 'disabled' : ''}>
+                            ${enCarrito ? 'Agregado' : 'Agregar al Carrito'}
+                        </button>
+                    `;
+                    listaServiciosDiv.appendChild(servicioCard);
+                });
+            }
+
+            function renderizarCarrito() {
+                listaCarritoDiv.innerHTML = '';
+                let total = 0;
+                if (carrito.length === 0) {
+                    listaCarritoDiv.innerHTML = '<p style="text-align: center; color: #aaa;">Aún no has agregado servicios.</p>';
+                } else {
+                    carrito.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.classList.add('item-carrito');
+                        itemDiv.innerHTML = `
+                            <span class="nombre">${item.nombre}</span>
+                            <span>$${item.precio.toFixed(2)}</span>
+                            <button class="btn-quitar" onclick="quitarDelCarrito(${item.id})"><i class="fas fa-trash-alt"></i></button>
+                        `;
+                        listaCarritoDiv.appendChild(itemDiv);
+                        total += item.precio;
+                    });
+                }
+                totalCarritoSpan.textContent = `$${total.toFixed(2)}`;
+            }
+            
+            // --- FUNCIONES DEL CARRITO ---
+            window.agregarAlCarrito = function(idServicio) {
+                if (carrito.some(item => item.id === idServicio)) return; // Ya está en el carrito
+                const servicio = serviciosTenis.find(s => s.id === idServicio);
+                carrito.push(servicio);
+                actualizarVista();
+            };
+
+            window.quitarDelCarrito = function(idServicio) {
+                carrito = carrito.filter(item => item.id !== idServicio);
+                actualizarVista();
+            };
+            
+            function actualizarVista() {
+                renderizarServicios();
+                renderizarCarrito();
+            }
+
+            // --- LÓGICA DE PEDIDO Y MODALES ---
+            btnFinalizarCompra.addEventListener('click', () => {
+                if (carrito.length === 0) {
+                    alert('Tu carrito está vacío. Agrega al menos un servicio.');
+                    return;
+                }
+                modalDatosCliente.style.display = 'flex';
+            });
+            
+            cerrarModalDatosBtn.addEventListener('click', () => modalDatosCliente.style.display = 'none');
+
+            pedidoForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                btnSubmitPedido.disabled = true;
+                btnSubmitPedido.textContent = 'Enviando...';
+
+                const codigo = Math.floor(100000 + Math.random() * 900000).toString();
+                const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+                
+                let detalles = carrito.map(item => `${item.nombre} - $${item.precio.toFixed(2)}`).join('\n');
+                
+                // Llenar campos ocultos
+                document.getElementById('detalles_pedido').value = detalles;
+                document.getElementById('total_pedido').value = `$${total.toFixed(2)}`;
+                document.getElementById('codigo_pedido').value = codigo;
+
+                const formData = new FormData(this);
+
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                }).then(response => {
+                    if (response.ok) {
+                        modalDatosCliente.style.display = 'none';
+                        document.getElementById('codigo-generado-confirmacion').textContent = codigo;
+                        modalConfirmacion.style.display = 'flex';
+                    } else {
+                        throw new Error('Hubo un problema con el envío.');
+                    }
+                }).catch(error => {
+                    console.error('Error en Formspree:', error);
+                    alert('No se pudo enviar el pedido. Por favor, inténtalo de nuevo.');
+                }).finally(() => {
+                    btnSubmitPedido.disabled = false;
+                    btnSubmitPedido.textContent = 'Enviar y Generar Código';
+                });
+            });
+
+            btnCerrarConfirmacion.addEventListener('click', () => {
+                modalConfirmacion.style.display = 'none';
+                // Limpiar todo
+                carrito = [];
+                pedidoForm.reset();
+                actualizarVista();
+            });
+
+            // Cerrar modales al hacer clic fuera
+            window.addEventListener('click', (event) => {
+                if (event.target == modalDatosCliente) modalDatosCliente.style.display = 'none';
+                if (event.target == modalConfirmacion) modalConfirmacion.style.display = 'none';
+            });
+
+            // --- FUNCIONALIDAD DEL MENÚ DESPLEGABLE ---
+            const menuBtn = document.getElementById('menu-btn');
+            const navMenu = document.getElementById('nav-menu');
+            const cerrarMenuBtn = document.getElementById('cerrar-menu');
+            menuBtn.addEventListener('click', () => navMenu.classList.add('activo'));
+            cerrarMenuBtn.addEventListener('click', () => navMenu.classList.remove('activo'));
+            document.querySelectorAll('.nav-desplegable a').forEach(link => {
+                link.addEventListener('click', () => navMenu.classList.remove('activo'));
+            });
+
+            // --- INICIALIZACIÓN ---
+            actualizarVista();
+        });
+    </script>
+
+</body>
+</html>

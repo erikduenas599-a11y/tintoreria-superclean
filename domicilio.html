@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicio a Domicilio - Super Clean TINTORERIAS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root { --color-primario-logo: #bbff00; --color-fondo-header: #1a1a1a; --color-texto-oscuro: #333; --color-texto-claro: #f0f0f0; --color-gris-fondo: #2e2e2e; --color-gris-intermedio: #555; --color-blanco: #ffffff; --sombra-ligera: 0 4px 10px rgba(0, 0, 0, 0.1); --transicion-suave: all 0.4s ease-in-out; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: var(--color-texto-oscuro); background-color: var(--color-blanco); }
+        .contenedor { max-width: 90%; margin: auto; padding: 0 15px; }
+        .header-principal { background: var(--color-fondo-header); box-shadow: var(--sombra-ligera); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 10px 0; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+        #menu-btn { font-size: 1.2rem; color: var(--color-blanco); cursor: pointer; font-weight: bold; padding: 5px; transition: color 0.3s ease; }
+        #menu-btn:hover { color: var(--color-primario-logo); }
+        .logo-container .texto-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-container .texto-logo .super-clean { font-family: 'Segoe Script', cursive, sans-serif; font-size: 1.4rem; color: var(--color-blanco); transform: rotate(-8deg); transform-origin: center center; white-space: nowrap; margin-bottom: 5px; }
+        .logo-container .texto-logo .tintorerias { font-family: Arial, sans-serif; font-size: 1.8rem; font-weight: bold; color: var(--color-primario-logo); letter-spacing: 2px; text-transform: uppercase; }
+        .nav-desplegable { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--color-fondo-header); z-index: 1001; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: translateY(-100%); transition: var(--transicion-suave); }
+        .nav-desplegable.activo { transform: translateY(0); }
+        .nav-desplegable ul { list-style: none; text-align: center; }
+        .nav-desplegable ul li { margin: 20px 0; }
+        .nav-desplegable ul li a { color: var(--color-blanco); font-size: 1.8rem; text-decoration: none; font-weight: bold; padding: 5px 10px; transition: color 0.3s ease; }
+        .nav-desplegable ul li a:hover { color: var(--color-primario-logo); }
+        #cerrar-menu { position: absolute; top: 25px; right: 30px; font-size: 2.5rem; color: var(--color-blanco); cursor: pointer; transition: transform 0.3s ease; }
+        #cerrar-menu:hover { transform: rotate(90deg); }
+        main { padding-top: 80px; padding-bottom: 80px; }
+        .seccion-contenido { padding: 40px 0; }
+        .seccion-contenido h2 { font-size: 2rem; color: var(--color-texto-oscuro); margin-bottom: 20px; text-align: center; }
+        .seccion-contenido p, .seccion-contenido li { font-size: 1.1rem; margin-bottom: 15px; }
+        .seccion-contenido ul { list-style: none; padding-left: 0; }
+        .seccion-contenido a { color: var(--color-primario-logo); text-decoration: none; font-weight: bold; }
+        .seccion-contenido a:hover { text-decoration: underline; }
+        .footer { background-color: var(--color-gris-fondo); color: var(--color-texto-claro); padding: 30px 0; font-size: 0.9em; position: fixed; bottom: 0; width: 100%; }
+        .footer-bottom { text-align: center; padding: 20px 0; }
+        @media (min-width: 768px) { .logo-container .texto-logo .super-clean { font-size: 1.5rem; } .logo-container .texto-logo .tintorerias { font-size: 2.2rem; } }
+    </style>
+</head>
+<body>
+    <div class="nav-desplegable" id="nav-menu">
+        <i class="fas fa-times" id="cerrar-menu"></i>
+        <ul>
+            <li class="inicio-link"><a href="index.html">Inicio</a></li>
+            <li><a href="ubicacion.html">Ubicacion</a></li>
+            <li><a href="domicilio.html">Servicio a Domicilio</a></li>
+            <li><a href="index.html#servicios">Servicios</a></li>
+            <li><a href="index.html#tenis">Lavado de Tenis</a></li>
+        </ul>
+    </div>
+    <header class="header-principal">
+        <nav class="navbar contenedor">
+            <div id="menu-btn">MENU</div>
+            <div class="logo-container">
+                <a href="index.html" class="texto-logo">
+                    <span class="super-clean">Super Clean</span>
+                    <span class="tintorerias">TINTORERIAS</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section id="domicilio-info" class="seccion-contenido">
+            <div class="contenedor" style="max-width: 800px; margin: auto; text-align: left;">
+                <h2>🚚 Servicio a Domicilio</h2>
+                <p>En nuestra tintorería sabemos que su tiempo es valioso. Por ello, ponemos a su disposición nuestro servicio a domicilio, diseñado para brindarle la máxima comodidad y seguridad en el cuidado de sus prendas. Nosotros nos encargamos de la recolección y entrega directamente en la puerta de su hogar, con puntualidad, calidad y atención personalizada.</p>
+                <p>Confíe en nosotros y disfrute de la tranquilidad de tener siempre sus prendas limpias y en perfectas condiciones, sin necesidad de desplazarse.</p>
+                
+                <h3>📞 Teléfonos de contacto</h3>
+                <ul>
+                    <li><a href="tel:5514824239">55 1482 4239</a></li>
+                    <li><a href="tel:5514825743">55 1482 5743</a></li>
+                </ul>
+
+                <h3>💬 Atención por WhatsApp</h3>
+                <ul>
+                    <li><a href="https://wa.me/525514824239?text=Hola,%20quiero%20informes%20del%20servicio%20a%20domicilio" target="_blank">Escríbanos al 55 1482 4239</a></li>
+                    <li><a href="https://wa.me/525514825743?text=Hola,%20quiero%20informes%20del%20servicio%20a%20domicilio" target="_blank">Escríbanos al 55 1482 5743</a></li>
+                </ul>
+
+                <h3>📧 Correo electrónico</h3>
+                <ul>
+                    <li><a href="mailto:angytagle@gmail.com?subject=Solicitud%20de%20servicio%20a%20domicilio">angytagle@gmail.com</a></li>
+                </ul>
+
+                <p style="text-align: center; margin-top: 30px;"><strong>✨ Agende su recolección hoy mismo y compruebe la diferencia en calidad y servicio.</strong></p>
+                <p style="text-align: center; font-style: italic; margin-top: 15px;">Nuestro servicio es totalmente gratuito en un radio de 5km de distancia.</p>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>© Todos los derechos reservados Super Clean TINTORERIAS 2024</p>
+        </div>
+    </footer>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const cerrarMenuBtn = document.getElementById('cerrar-menu');
+        const abrirMenu = () => navMenu.classList.add('activo');
+        const cerrarMenu = () => navMenu.classList.remove('activo');
+        menuBtn.addEventListener('click', abrirMenu);
+        cerrarMenuBtn.addEventListener('click', cerrarMenu);
+        document.querySelectorAll('.nav-desplegable a').forEach(link => { link.addEventListener('click', cerrarMenu); });
+    </script>
+</body>
+</html>

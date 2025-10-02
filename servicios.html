@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Servicios - Super Clean TINTORERIAS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS sin cambios */
+        :root { --color-primario-logo: #bbff00; --color-fondo-header: #1a1a1a; --color-texto-oscuro: #333; --color-texto-claro: #f0f0f0; --color-gris-fondo: #2e2e2e; --color-gris-intermedio: #555; --color-blanco: #ffffff; --sombra-ligera: 0 4px 10px rgba(0, 0, 0, 0.1); --transicion-suave: all 0.4s ease-in-out; --color-exito: #28a745; --color-alerta: #ffc107; --color-error: #dc3545; --color-info: #007bff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--color-texto-oscuro); background-color: var(--color-blanco); }
+        .contenedor { max-width: 90%; margin: auto; padding: 0 15px; }
+        .header-principal { background: var(--color-fondo-header); box-shadow: var(--sombra-ligera); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 10px 0; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+        #menu-btn { font-size: 1.2rem; color: var(--color-blanco); cursor: pointer; font-weight: bold; padding: 5px; transition: color 0.3s ease; }
+        #menu-btn:hover { color: var(--color-primario-logo); }
+        .logo-container .texto-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-container .texto-logo .super-clean { font-family: 'Segoe Script', cursive, sans-serif; font-size: 1.4rem; color: var(--color-blanco); transform: rotate(-8deg); transform-origin: center center; white-space: nowrap; margin-bottom: 5px; }
+        .logo-container .texto-logo .tintorerias { font-family: Arial, sans-serif; font-size: 1.8rem; font-weight: bold; color: var(--color-primario-logo); letter-spacing: 2px; text-transform: uppercase; }
+        .nav-desplegable { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--color-fondo-header); z-index: 1001; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: translateY(-100%); transition: var(--transicion-suave); }
+        .nav-desplegable.activo { transform: translateY(0); }
+        .nav-desplegable ul { list-style: none; text-align: center; }
+        .nav-desplegable ul li { margin: 20px 0; }
+        .nav-desplegable ul li a { color: var(--color-blanco); font-size: 1.8rem; text-decoration: none; font-weight: bold; padding: 5px 10px; transition: color 0.3s ease; }
+        .nav-desplegable ul li a:hover { color: var(--color-primario-logo); }
+        #cerrar-menu { position: absolute; top: 25px; right: 30px; font-size: 2.5rem; color: var(--color-blanco); cursor: pointer; transition: transform 0.3s ease; }
+        #cerrar-menu:hover { transform: rotate(90deg); }
+        .inicio-link { display: block; }
+        @media (min-width: 768px) { .logo-container .texto-logo .super-clean { font-size: 1.5rem; } .logo-container .texto-logo .tintorerias { font-size: 2.2rem; } }
+        main { padding-top: 80px; display: flex; flex-direction: column; gap: 30px; padding-bottom: 100px; }
+        .seccion-servicios { background-color: var(--color-blanco); padding: 30px 0; }
+        .seccion-servicios h1 { text-align: center; font-size: 2.5rem; color: var(--color-fondo-header); margin-bottom: 40px; position: relative; }
+        .seccion-servicios h1::after { content: ''; width: 80px; height: 4px; background-color: var(--color-primario-logo); position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); border-radius: 2px; }
+        .lista-productos { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
+        .producto-card { background-color: #f8f8f8; border-radius: 12px; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); padding: 25px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; }
+        .producto-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(to right, var(--color-primario-logo), #e0e0e0); z-index: 1; }
+        .producto-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
+        .producto-card .nombre-servicio { font-size: 1.4rem; font-weight: bold; color: var(--color-fondo-header); margin-bottom: 10px; }
+        .producto-card .precio-servicio { font-size: 1.8rem; font-weight: bolder; color: var(--color-primario-logo); margin-bottom: 15px; }
+        .controles-cantidad { display: flex; align-items: center; gap: 10px; margin-top: 15px; width: 100%; justify-content: center; }
+        .controles-cantidad button { background-color: var(--color-fondo-header); color: var(--color-blanco); border: none; border-radius: 50%; width: 35px; height: 35px; font-size: 1.3rem; cursor: pointer; transition: background-color 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .controles-cantidad button:hover { background-color: var(--color-gris-intermedio); }
+        .controles-cantidad .cantidad { font-size: 1.2rem; font-weight: bold; min-width: 30px; text-align: center; }
+        .seccion-carrito { background-color: var(--color-fondo-header); color: var(--color-blanco); padding: 30px 0; }
+        .seccion-carrito h2 { text-align: center; font-size: 2rem; margin-bottom: 30px; color: var(--color-primario-logo); }
+        #lista-carrito { background-color: #333; border-radius: 10px; padding: 20px; min-height: 100px; margin-bottom: 20px; box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3); }
+        .item-carrito { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed #555; }
+        .item-carrito:last-child { border-bottom: none; }
+        .item-carrito .info-item .nombre { font-weight: bold; font-size: 1.1rem; }
+        .item-carrito .info-item .detalles { font-size: 0.9rem; color: #ccc; }
+        .item-carrito .acciones-item { display: flex; align-items: center; gap: 10px; }
+        .item-carrito .acciones-item .precio-total-item { font-weight: bold; color: var(--color-primario-logo); }
+        .item-carrito .acciones-item .btn-quitar { background-color: var(--color-error); color: var(--color-blanco); border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; transition: background-color 0.3s ease; }
+        .item-carrito .acciones-item .btn-quitar:hover { background-color: #c82333; }
+        .carrito-total { text-align: right; font-size: 1.5rem; font-weight: bold; margin-top: 20px; color: var(--color-primario-logo); }
+        .carrito-total span { color: var(--color-blanco); font-size: 1.2rem; }
+        .campo-telefono { margin-top: 25px; text-align: center; }
+        .campo-telefono label { display: block; margin-bottom: 10px; font-size: 1.1rem; color: var(--color-blanco); }
+        .campo-telefono input { width: 100%; max-width: 350px; padding: 12px; border-radius: 8px; border: 2px solid var(--color-gris-intermedio); background-color: #333; color: var(--color-blanco); font-size: 1.2rem; text-align: center; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+        .campo-telefono input:focus { outline: none; border-color: var(--color-primario-logo); box-shadow: 0 0 10px rgba(187, 255, 0, 0.5); }
+        .btn-finalizar-compra { display: block; width: 100%; max-width: 350px; margin: 30px auto 0; padding: 15px 30px; background-color: var(--color-primario-logo); color: var(--color-fondo-header); font-size: 1.3rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
+        .btn-finalizar-compra:hover { background-color: #cdff33; transform: translateY(-2px); }
+        .btn-finalizar-compra:disabled { opacity: 0.7; cursor: wait; }
+        .modal { display: none; position: fixed; z-index: 1002; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px); align-items: center; justify-content: center; }
+        .modal-content { background-color: var(--color-fondo-header); margin: 15% auto; padding: 30px; border-radius: 15px; max-width: 500px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); color: var(--color-blanco); position: relative; transform: scale(0.9); opacity: 0; animation: modalFadeIn 0.3s forwards ease-out; }
+        @keyframes modalFadeIn { to { transform: scale(1); opacity: 1; } }
+        .modal-content h3 { color: var(--color-primario-logo); font-size: 2rem; margin-bottom: 20px; }
+        .modal-content p { font-size: 1.1rem; margin-bottom: 15px; }
+        .codigo-pedido { font-size: 2.5rem; font-weight: bold; color: var(--color-primario-logo); letter-spacing: 5px; margin: 20px 0; background-color: #333; padding: 10px 20px; border-radius: 8px; display: inline-block; }
+        .modal-content .total-final { font-size: 1.5rem; font-weight: bold; margin-top: 15px; color: var(--color-blanco); }
+        .modal-botones { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .modal-botones button, .modal-botones a { padding: 12px 25px; border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: transform 0.2s ease; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .modal-botones button:hover, .modal-botones a:hover { transform: translateY(-2px); }
+        .btn-cerrar-modal { background-color: var(--color-gris-intermedio); color: var(--color-blanco); }
+        .btn-cerrar-modal:hover { background-color: #666; }
+        .btn-whatsapp-modal { background-color: #25D366; color: var(--color-blanco); }
+        .btn-whatsapp-modal:hover { background-color: #1DA851; }
+        .btn-confirmar-cliente { background-color: var(--color-info); color: var(--color-blanco); }
+        .btn-confirmar-cliente:hover { background-color: #0069d9; }
+        .modal-content .close-button { position: absolute; top: 15px; right: 25px; color: #aaa; font-size: 35px; font-weight: bold; cursor: pointer; transition: color 0.3s ease; }
+        .modal-content .close-button:hover, .modal-content .close-button:focus { color: var(--color-primario-logo); text-decoration: none; cursor: pointer; }
+        .footer { background-color: var(--color-gris-fondo); color: var(--color-texto-claro); padding: 30px 0; font-size: 0.9em; margin-top: 40px; }
+        .footer-bottom { text-align: center; padding: 20px 0; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-desplegable" id="nav-menu">
+        <i class="fas fa-times" id="cerrar-menu"></i>
+        <ul>
+            <li class="inicio-link"><a href="index.html">Inicio</a></li>
+            <li><a href="ubicacion.html">Ubicacion</a></li>
+            <li><a href="domicilio.html">Servicio a Domicilio</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="index.html#tenis">Lavado de Tenis</a></li>
+        </ul>
+    </div>
+
+    <header class="header-principal">
+        <nav class="navbar contenedor">
+            <div id="menu-btn">MENU</div>
+            <div class="logo-container">
+                <a href="index.html" class="texto-logo">
+                    <span class="super-clean">Super Clean</span>
+                    <span class="tintorerias">TINTORERIAS</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="seccion-servicios">
+            <div class="contenedor">
+                <h1>Seleccione Nuestros Servicios</h1>
+                <div class="lista-productos" id="lista-productos"></div>
+            </div>
+        </section>
+        <section class="seccion-carrito">
+            <div class="contenedor">
+                <h2>Tu Carrito de Servicios</h2>
+                <div id="lista-carrito"><p style="text-align: center; color: #aaa; margin-top: 20px;">El carrito está vacío.</p></div>
+                <div class="carrito-total">Total: <span id="total-carrito">$0.00</span></div>
+                
+                <form id="order-form" action="https://formspree.io/f/mpwyrjpd" method="POST">
+                    <div class="campo-telefono">
+                        <label for="cliente-telefono">Tu Número de WhatsApp (10 dígitos):</label>
+                        <input type="tel" id="cliente-telefono" name="telefono_cliente" placeholder="Ej: 5512345678" required minlength="10" maxlength="10" pattern="\d{10}">
+                    </div>
+                    <input type="hidden" name="codigo_pedido" id="form-codigo">
+                    <input type="hidden" name="total_pedido" id="form-total">
+                    <textarea name="detalles_del_pedido" id="form-detalles" style="display:none;"></textarea>
+                    <button type="submit" class="btn-finalizar-compra" id="btn-finalizar-compra">Finalizar Pedido</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal-pedido" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>¡Pedido Enviado!</h3>
+            <p>Guarda este código. Lo necesitarás al entregar o recibir tus prendas.</p>
+            <div class="codigo-pedido" id="codigo-generado"></div>
+            <p class="total-final">Total a pagar: <span id="total-modal">$0.00</span></p>
+            <p>Usa los botones para confirmar o cerrar.</p>
+            <div class="modal-botones">
+                <a class="btn-confirmar-cliente" id="btn-confirmar-cliente" href="#" target="_blank"><i class="fab fa-whatsapp"></i> Confirmar al Cliente</a>
+                <button class="btn-cerrar-modal" id="btn-cerrar-modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>© Todos los derechos reservados Super Clean TINTORERIAS 2024</p>
+        </div>
+    </footer>
+
+    <script>
+        const productos = [
+            { id: 1, nombre: "TRAJE 2PZAS.", precio: 110.00 }, { id: 2, nombre: "PANTALÓN", precio: 55.00 }, { id: 3, nombre: "SACO", precio: 55.00 }, { id: 4, nombre: "FALDA", precio: 55.00 }, { id: 5, nombre: "BLUSA", precio: 55.00 }, { id: 6, nombre: "VESTIDO CASUAL", precio: 100.00 }, { id: 7, nombre: "VESTIDO LARGO", precio: 130.00 }, { id: 8, nombre: "VESTIDO NOCHE", precio: 160.00 }, { id: 9, nombre: "CHALECO", precio: 50.00 }, { id: 10, nombre: "CORBATA", precio: 45.00 }, { id: 11, nombre: "CHAMARRA SENCILLA", precio: 80.00 }, { id: 12, nombre: "CHAMARRA CAZADORA", precio: 95.00 }, { id: 13, nombre: "CHAMARRA LARGA", precio: 120.00 }, { id: 14, nombre: "CHAMARRA PIEL CORTA", precio: 180.00 }, { id: 15, nombre: "CHAMARRA PIEL LARGA", precio: 210.00 }, { id: 16, nombre: "ABRIGO CORTO", precio: 90.00 }, { id: 17, nombre: "ABRIGO LARGO", precio: 110.00 }, { id: 18, nombre: "GABARDINA", precio: 75.00 }, { id: 19, nombre: "GABARDINA LARGA", precio: 120.00 }, { id: 20, nombre: "GABARDINA CON FORRO", precio: 150.00 }, { id: 21, nombre: "EDREDON IND.", precio: 90.00 }, { id: 22, nombre: "EDREDON MAT.", precio: 100.00 }, { id: 23, nombre: "EDREDON QUINK.", precio: 120.00 }, { id: 24, nombre: "EDREDON KING.", precio: 130.00 }, { id: 25, nombre: "PLANCHADO (DOCENA)", precio: 150.00 }, { id: 26, nombre: "PLANCHADO CON GANCHOS", precio: 180.00 }, { id: 27, nombre: "PLANCHADO PIEZA", precio: 25.00 },
+        ];
+        let carrito = JSON.parse(localStorage.getItem('carritoSuperClean')) || [];
+        const listaProductosDiv = document.getElementById('lista-productos');
+        const listaCarritoDiv = document.getElementById('lista-carrito');
+        const totalCarritoSpan = document.getElementById('total-carrito');
+        const modalPedido = document.getElementById('modal-pedido');
+        const codigoGeneradoDiv = document.getElementById('codigo-generado');
+        const totalModalSpan = document.getElementById('total-modal');
+        const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+        const closeModalButtonTop = modalPedido.querySelector('.close-button');
+        const btnConfirmarCliente = document.getElementById('btn-confirmar-cliente');
+        const orderForm = document.getElementById('order-form');
+        const formCodigo = document.getElementById('form-codigo');
+        const formTotal = document.getElementById('form-total');
+        const formDetalles = document.getElementById('form-detalles');
+        const clienteTelefonoInput = document.getElementById('cliente-telefono');
+
+        function renderizarProductos() {
+            listaProductosDiv.innerHTML = '';
+            productos.forEach(producto => {
+                const itemEnCarrito = carrito.find(item => item.id === producto.id);
+                const cantidadInicial = itemEnCarrito ? itemEnCarrito.cantidad : 0;
+                const productoCard = document.createElement('div');
+                productoCard.classList.add('producto-card');
+                productoCard.innerHTML = `<div class="nombre-servicio">${producto.nombre}</div><div class="precio-servicio">$${producto.precio.toFixed(2)}</div><div class="controles-cantidad"><button onclick="cambiarCantidad(${producto.id}, -1)">-</button><span class="cantidad" id="cantidad-${producto.id}">${cantidadInicial}</span><button onclick="cambiarCantidad(${producto.id}, 1)">+</button></div>`;
+                listaProductosDiv.appendChild(productoCard);
+            });
+        }
+        function cambiarCantidad(idProducto, cambio) {
+            const cantidadSpan = document.getElementById(`cantidad-${idProducto}`);
+            let cantidadActual = parseInt(cantidadSpan.textContent);
+            cantidadActual += cambio;
+            if (cantidadActual < 0) cantidadActual = 0;
+            cantidadSpan.textContent = cantidadActual;
+            actualizarCarrito(idProducto, cantidadActual);
+        }
+        function actualizarCarrito(idProducto, nuevaCantidad) {
+            const productoExistente = carrito.find(item => item.id === idProducto);
+            const productoBase = productos.find(p => p.id === idProducto);
+            if (!productoBase) return;
+            if (nuevaCantidad > 0) {
+                if (productoExistente) { productoExistente.cantidad = nuevaCantidad; } else { carrito.push({ ...productoBase, cantidad: nuevaCantidad }); }
+            } else {
+                carrito = carrito.filter(item => item.id !== idProducto);
+            }
+            renderizarCarrito();
+        }
+        function renderizarCarrito() {
+            listaCarritoDiv.innerHTML = '';
+            let totalGeneral = 0;
+            if (carrito.length === 0) {
+                listaCarritoDiv.innerHTML = '<p style="text-align: center; color: #aaa; margin-top: 20px;">El carrito está vacío.</p>';
+            } else {
+                carrito.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('item-carrito');
+                    const subtotalItem = item.cantidad * item.precio;
+                    totalGeneral += subtotalItem;
+                    itemDiv.innerHTML = `<div class="info-item"><span class="nombre">${item.nombre}</span><span class="detalles">${item.cantidad} x $${item.precio.toFixed(2)}</span></div><div class="acciones-item"><span class="precio-total-item">$${subtotalItem.toFixed(2)}</span><button class="btn-quitar" onclick="quitarDelCarrito(${item.id})"><i class="fas fa-trash-alt"></i></button></div>`;
+                    listaCarritoDiv.appendChild(itemDiv);
+                });
+            }
+            totalCarritoSpan.textContent = `$${totalGeneral.toFixed(2)}`;
+            localStorage.setItem('carritoSuperClean', JSON.stringify(carrito));
+        }
+        function quitarDelCarrito(idProducto) {
+            const cantidadSpan = document.getElementById(`cantidad-${idProducto}`);
+            if (cantidadSpan) { cantidadSpan.textContent = '0'; }
+            carrito = carrito.filter(item => item.id !== idProducto);
+            renderizarCarrito();
+        }
+        function generarCodigoUnico() { return Math.floor(100000 + Math.random() * 900000).toString(); }
+        function limpiarTodo() {
+            carrito = [];
+            localStorage.removeItem('carritoSuperClean');
+            clienteTelefonoInput.value = '';
+            renderizarProductos();
+            renderizarCarrito();
+        }
+
+        // --- INICIA LA NUEVA LÓGICA DE ENVÍO ---
+        orderForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Previene el envío normal de la página
+
+            if (carrito.length === 0) {
+                alert('Tu carrito está vacío. Por favor, selecciona al menos un servicio.');
+                return;
+            }
+
+            const submitButton = document.getElementById('btn-finalizar-compra');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Enviando...';
+            submitButton.disabled = true;
+
+            const telefonoCliente = clienteTelefonoInput.value;
+            const codigo = generarCodigoUnico();
+            const total = totalCarritoSpan.textContent;
+            
+            let notaDesglosada = "";
+            carrito.forEach(item => {
+                notaDesglosada += `- ${item.nombre} (${item.cantidad} x $${item.precio.toFixed(2)}) = $${(item.cantidad * item.precio).toFixed(2)}\n`;
+            });
+
+            formCodigo.value = codigo;
+            formTotal.value = total;
+            formDetalles.value = notaDesglosada;
+
+            try {
+                const response = await fetch(orderForm.action, {
+                    method: orderForm.method,
+                    body: new FormData(orderForm),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    // Si Formspree confirma la recepción, mostramos el modal.
+                    codigoGeneradoDiv.textContent = codigo;
+                    totalModalSpan.textContent = total;
+                    
+                    let mensajeConfirmacion = `¡Hola! 👋 Gracias por tu pedido en Super Clean TINTORERIAS.\n\n`;
+                    mensajeConfirmacion += `Tu código de pedido es: *${codigo}*\n\n`;
+                    mensajeConfirmacion += `*Resumen de tu nota:*\n${notaDesglosada}\n`;
+                    mensajeConfirmacion += `====================================\n`;
+                    mensajeConfirmacion += `TOTAL: ${total}\n\n`;
+                    mensajeConfirmacion += `Por favor, presenta este código al momento de la recolección/entrega. ¡Gracias por tu preferencia!`;
+                    
+                    btnConfirmarCliente.href = `https://wa.me/52${telefonoCliente}?text=${encodeURIComponent(mensajeConfirmacion)}`;
+                    
+                    modalPedido.style.display = 'flex';
+                } else {
+                    // Si Formspree da un error, avisamos al usuario.
+                    alert('Hubo un problema al registrar el pedido. Por favor, inténtelo de nuevo más tarde.');
+                }
+            } catch (error) {
+                // Si hay un error de red, avisamos al usuario.
+                console.error("Error de red al enviar el formulario:", error);
+                alert('No se pudo enviar el pedido. Por favor, verifique su conexión a internet.');
+            } finally {
+                // Se reestablece el botón, haya funcionado o no.
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            }
+        });
+        // --- TERMINA LA NUEVA LÓGICA DE ENVÍO ---
+
+        function cerrarYLimpiarModal() {
+            modalPedido.style.display = 'none';
+            limpiarTodo();
+        }
+        btnCerrarModal.addEventListener('click', cerrarYLimpiarModal);
+        closeModalButtonTop.addEventListener('click', cerrarYLimpiarModal);
+        window.addEventListener('click', (event) => {
+            if (event.target == modalPedido) {
+                cerrarYLimpiarModal();
+            }
+        });
+
+        const menuBtn = document.getElementById('menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const cerrarMenuBtn = document.getElementById('cerrar-menu');
+        const abrirMenu = () => navMenu.classList.add('activo');
+        const cerrarMenu = () => navMenu.classList.remove('activo');
+        menuBtn.addEventListener('click', abrirMenu);
+        cerrarMenuBtn.addEventListener('click', cerrarMenu);
+        document.querySelectorAll('.nav-desplegable a').forEach(link => { link.addEventListener('click', cerrarMenu); });
+        
+        renderizarProductos();
+        renderizarCarrito();
+    </script>
+
+</body>
+</html>
